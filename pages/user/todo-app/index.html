@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <title>SmartTodo</title>
+	<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      font-family: 'Quicksand', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-indigo-50 flex justify-center items-center h-screen">
+  <div class="bg-indigo-100 p-8 rounded-lg shadow-md w-full h-[calc(100vh-100px)] m-[50px] flex flex-col">
+    <div class="flex justify-between items-center mb-8">
+      <div>
+        <span class="text-3xl font-bold text-indigo-600">Smart</span>
+        <span class="text-3xl font-bold">Todo</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <button class="p-2 hover:bg-indigo-100 rounded-full">🔍</button>
+        <button class="p-2 hover:bg-indigo-100 rounded-full">👤</button>
+      </div>
+    </div>
+
+    <div class="flex justify-between items-center mb-10">
+      <div class="text-center flex-1">
+        <h2 class="text-gray-600 text-lg">Completed</h2>
+        <p class="text-2xl font-bold text-indigo-600">0 <span class="text-gray-600 text-lg font-normal">Tasks</span></p>
+      </div>
+      <div class="text-center flex-1">
+        <h2 class="text-gray-600 text-lg">Pending</h2>
+        <p class="text-2xl font-bold text-indigo-600">0 <span class="text-gray-600 text-lg font-normal">Tasks</span></p>
+      </div>
+      <div class="text-center flex-1">
+        <h2 class="text-gray-600 text-lg">Progress</h2>
+        <p class="text-2xl font-bold text-indigo-600">0<span class="text-gray-600 text-lg font-normal">%</span></p>
+      </div>
+    </div>
+
+    <div class="mb-4 flex justify-between items-center">
+      <h3 id="task-date" class="text-xl font-semibold">📅 Tasks for today</h3>
+      <div class="flex items-center gap-3">
+        <button class="border px-3 py-1 rounded-md text-sm bg-indigo-200">View All</button>
+        <button type="button" class="btn btn-primary bg-indigo-600 hover:bg-indigo-700 text-sm font-bold text-white px-4 py-1 rounded-md" data-toggle="modal" data-target="#addModal">+ New task</button>
+      </div>
+    </div>
+
+    <div id="container-tasks" class="flex flex-1 flex-col justify-center text-gray-500 py-20 w-full">
+			<div id="no-tasks" class="text-center">
+				<div class="text-6xl">🏖️</div>
+      	<p class="mt-4">It looks like there are no tasks available.<br>Click above to add a new task</p>
+			</div>
+			<ul id="task-list"></ul>
+    </div>
+
+    <div class="text-sm text-gray-500 flex justify-between items-center">
+      <button class="text-indigo-500 hover:text-indigo-700">Clear All</button>
+      <button id="clear-storage">Clear</button>
+    </div>
+
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content rounded-2xl shadow-lg overflow-hidden border-0">
+					<div class="modal-header bg-indigo-100 border-0 px-6 py-4">
+						<h5 class="modal-title text-2xl font-semibold text-indigo-700" id="exampleModalLabel">Add Task</h5>
+						<button type="button" class="text-gray-500 hover:text-indigo-600 text-2xl font-bold leading-none" data-dismiss="modal" aria-label="Close">&times;</button>
+					</div>
+
+					<div class="modal-body bg-white text-gray-800 px-6 py-5 space-y-5">
+						<p class="text-gray-500 mb-3">Add a new task below. Click <strong>Save</strong> when you're done.</p>
+
+						<div>
+							<label for="task-name" class="block text-sm font-medium text-gray-700 mb-1">Task Name</label>
+							<input type="text" id="task-name" placeholder="Enter task name"
+								class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent">
+						</div>
+
+						<div class="grid grid-cols-2 gap-4">
+							<div>
+								<label for="task-priority" class="block text-sm font-medium text-gray-700 mb-1">Priority</label>
+								<select id="task-priority" class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent">
+									<option>Low</option>
+									<option>Medium</option>
+									<option>High</option>
+								</select>
+							</div>
+							<div>
+								<label for="task-status" class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+								<select id="task-status" class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent">
+									<option>In Progress</option>
+									<option>Completed</option>
+									<option>Pending</option>
+								</select>
+							</div>
+						</div>
+
+						<div>
+							<label for="task-due-date" class="block text-sm font-medium text-gray-700 mb-1">Due Date</label>
+							<input type="date" id="task-due-date"
+								class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent">
+						</div>
+					</div>
+
+					<div class="modal-footer bg-indigo-50 border-0 px-6 py-3 flex justify-end gap-3">
+						<button type="button" class="px-4 py-1 rounded-md bg-indigo-100 text-gray-600 hover:bg-indigo-200 text-sm" data-dismiss="modal">Cancel</button>
+						<button type="button" class="px-4 py-1 rounded-md bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold" id="save-task-btn">Save Task</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content rounded-2xl shadow-lg overflow-hidden border-0">
+					<div class="modal-header bg-indigo-100 border-0 px-6 py-4">
+						<h5 class="modal-title text-2xl font-semibold text-indigo-700" id="exampleModalLabel">Edit Task</h5>
+						<button type="button" class="text-gray-500 hover:text-indigo-600 text-2xl font-bold leading-none" data-dismiss="modal" aria-label="Close">&times;</button>
+					</div>
+
+					<div class="modal-body bg-white text-gray-800 px-6 py-5 space-y-5">
+						<p class="text-gray-500 mb-3">Edit the task details below. Click <strong>Save</strong> when you're done.</p>
+
+						<div>
+							<label for="task-name" class="block text-sm font-medium text-gray-700 mb-1">Task Name</label>
+							<input type="text" id="task-name-edit" placeholder="Enter task name"
+								class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent">
+						</div>
+
+						<div class="grid grid-cols-2 gap-4">
+							<div>
+								<label for="task-priority" class="block text-sm font-medium text-gray-700 mb-1">Priority</label>
+								<select id="task-priority-edit" class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent">
+									<option>Low</option>
+									<option>Medium</option>
+									<option>High</option>
+								</select>
+							</div>
+							<div>
+								<label for="task-status" class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+								<select id="task-status-edit" class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent">
+									<option>In Progress</option>
+									<option>Completed</option>
+									<option>Pending</option>
+								</select>
+							</div>
+						</div>
+
+						<div>
+							<label for="task-due-date" class="block text-sm font-medium text-gray-700 mb-1">Due Date</label>
+							<input type="date" id="task-due-date-edit"
+								class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent">
+						</div>
+					</div>
+
+					<div class="modal-footer bg-indigo-50 border-0 px-6 py-3 flex justify-end gap-3">
+						<button type="button" class="px-4 py-1 rounded-md bg-indigo-100 text-gray-600 hover:bg-indigo-200 text-sm" data-dismiss="modal">Cancel</button>
+						<button type="button" class="px-4 py-1 rounded-md bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold" id="save-task-btn-edit">Save Task</button>
+					</div>
+				</div>
+			</div>
+		</div>
+  </div>
+</body>
+<script src="../../../components/common/authentication.js"></script>
+<script src="./script.js"></script>
+</html>

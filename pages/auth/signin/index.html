@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      font-family: 'Quicksand', sans-serif;
+    }
+  </style>
+</head>
+<body class="w-screen h-screen bg-slate-100 flex justify-center items-center">
+  <div class="hidden md:flex flex-1 h-full">
+    <img src="../../../assets/images/signin.jpg" alt="Signin Cover Image" class="w-full h-full object-cover">
+  </div>
+
+  <div class="flex h-full justify-center items-center p-8 ">
+    <div class="bg-white rounded-2xl shadow-lg w-full min-w-[400px] p-8">
+      <h1 class="title-font text-3xl font-bold text-slate-800 mb-6 text-center">Sign In</h1>
+      <div class="flex flex-col gap-5">
+        <div>
+          <h2 class="text-sm font-medium text-slate-600">Email</h2>
+          <input type="email" class="mt-1 w-full rounded-lg border border-slate-300 px-4 py-2" id="email">
+        </div>
+        <div>
+          <h2 class="text-sm font-medium text-slate-600">Password</h2>
+          <input type="password" class="mt-1 w-full rounded-lg border border-slate-300 px-4 py-2" id="password">
+        </div>
+        <button type="submit" class="w-full bg-indigo-600 text-white font-semibold py-2 rounded-lg hover:bg-indigo-700 transition" id="signin-btn">Sign In</button>
+        <button type="button" class="w-full border border-slate-300 text-slate-700 font-semibold py-2 rounded-lg hover:bg-slate-100 transition flex items-center justify-center gap-2" id="signin-with-google-btn">
+          Sign In with Google
+        </button>
+      </div>
+      <p class="text-sm text-slate-500 text-center mt-6">Don’t have an account? <a href="../signup/index.html" class="text-indigo-600 font-medium hover:underline">Sign Up</a></p>
+    </div>
+  </div>
+</body>
+<script src="../../../components/common/authentication.js"></script>
+<script src="script.js" type="module"></script>
+</html>

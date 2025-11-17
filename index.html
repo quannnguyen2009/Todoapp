@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Todo App</title>
+  <script src="./config/tailwind.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body class="w-screen h-screen bg-indigo-300 flex flex-col justify-center items-center">
+  <div class="flex flex-col gap-6 items-center">
+    <img src="./assets/images/logo.png" alt="Logo App" class="w-[200px]">
+    <h1 class="text-4xl font-bold text-slate-800 tracking-tight" style="font-family: 'Quicksand', sans-serif;">
+        Todo App
+    </h1>
+  </div>    
+</body>
+<script src="components/common/authentication.js"></script>
+<script>
+  function handleRouter() {
+    window.location.href = "./pages/auth/signin";
+  }
+  setTimeout(handleRouter, 2000);
+</script>
+</html>
